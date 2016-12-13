@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<HTML>
+ <HEAD>
+  <TITLE>Spirograph Javascript</TITLE>
+
+ </HEAD>
+
+ <BODY>
+  
+<canvas id="Spirograph" width="800" height="600"></canvas> 
+
+
+<SCRIPT>
+
+function getRandomColor() {
+
+// creating a random number between 0 and 255
+var r = Math.floor(Math.random()*256);
+var g = Math.floor(Math.random()*256);
+var b = Math.floor(Math.random()*256);
+ 
+// going from decimal to hex
+var hexR = r.toString(16);
+var hexG = g.toString(16);
+var hexB = b.toString(16);
+ 
+// making sure single character values are prepended with a "0"
+if (hexR.length == 1) {
+
+hexR = "0" + hexR;
+
+}
+ 
+if (hexG.length == 1) {
+
+hexG = "0" + hexG;
+
+}
+ 
+if (hexB.length == 1) {
+
+hexB = "0" + hexB;
+
+}
+ 
+// creating the hex value by concatenatening the string values
+var hexColor = "#" + hexR + hexG + hexB;
+return hexColor.toUpperCase();
+
+} 
+
+var myRandomColor = getRandomColor();
+var x = 768/2;
+var y = 420;
+var k = 200;
+var da = .7*Math.PI;
+
+var c = document.getElementById("Spirograph");
+var ctx = c.getContext("2d");
+ctx.moveTo(x,y+k);
+
+first = x;
+second = y+k;
+
+for (a=0; a < 101  ; a += da) {
+ctx.beginPath();
+ctx.moveTo(first,second);
+ctx.lineTo(x+k*Math.sin(a),y+k*Math.cos(a));
+
+var myRandomColor = getRandomColor();
+ctx.strokeStyle = myRandomColor;
+ctx.stroke();
+
+first = x+k*Math.sin(a);
+second = y+k*Math.cos(a);
+
+}
+
+</SCRIPT> 
+
+ </BODY>
+</HTML>
+
